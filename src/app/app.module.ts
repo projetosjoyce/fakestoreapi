@@ -16,6 +16,10 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { PanelModule } from 'primeng/panel';
 import { TooltipModule } from 'primeng/tooltip';
 import { TruncatePipe } from './components/pipes/truncate.pipe';
+import { PaginatorModule } from 'primeng/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Importa o BrowserAnimationsModule
+
+
 
 @NgModule({
   declarations: [
@@ -37,6 +41,8 @@ import { TruncatePipe } from './components/pipes/truncate.pipe';
     StyleClassModule,
     PanelModule,
     TooltipModule,
+    PaginatorModule,
+    BrowserAnimationsModule,
   ],
 
   providers: [],

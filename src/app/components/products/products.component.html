@@ -1,31 +1,33 @@
+
 <div class="surface-card p-4 shadow-2 border-round">
   <app-header></app-header>
-  <div class="text-3xl font-medium text-900 mb-3" style="text-align: center;">FILTRO PARA PESQUISAR </div>
+  <div class="text-3xl font-medium text-900 mb-3" style="text-align: center;">FILTRO PARA PESQUISAR</div>
 
-
-
-
-    <div class="products-container">
-      <div *ngFor="let product of products" class="product-card">
-        <p-card [header]="product.title" subheader="Card Subheader" [style]="{ width: '360px' }">
-          <ng-template pTemplate="header">
-            <img [alt]="product.title" [src]="product.image" class="product-image" />
-          </ng-template>
-          <p pTooltip="{{ product.description }}" tooltipPosition="top">{{ product.description | truncate:100 }}</p>
-          <ng-template pTemplate="footer">
-            <div class="flex gap-3 mt-1">
-              <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full"></p-button>
-              <p-button label="Save" class="w-full" styleClass="w-full"></p-button>
-            </div>
-          </ng-template>
-        </p-card>
-      </div>
+  <div class="products-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;">
+    <div *ngFor="let product of paginatedProducts" class="product-card" style="width: calc(50% - 8px); box-sizing: border-box;">
+      <p-card [header]="product.title" subheader="Card Subheader" [style]="{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }">
+        <ng-template pTemplate="header">
+          <img [alt]="product.title" [src]="product.image" class="product-image" style="width: 100%; height: auto; max-height: 200px; object-fit: cover;" />
+        </ng-template>
+        <p pTooltip="{{ product.description }}" tooltipPosition="top" style="flex-grow: 1; overflow: hidden; margin: 0;">{{ product.description | truncate:100 }}</p>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-3 mt-1">
+            <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full"></p-button>
+            <p-button label="Save" class="w-full" styleClass="w-full"></p-button>
+          </div>
+        </ng-template>
+      </p-card>
     </div>
+  </div>
 
-
-
-
-
+  <p-paginator
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[6, 10, 20]" />
 
   <app-footer></app-footer>
 </div>
+
+
