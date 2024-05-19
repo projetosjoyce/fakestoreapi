@@ -9,6 +9,13 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductsComponent } from './components/products/products.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CardModule } from 'primeng/card';
+import { MenubarModule } from 'primeng/menubar';
+import { StyleClassModule } from 'primeng/styleclass';
+import { PanelModule } from 'primeng/panel';
+import { TooltipModule } from 'primeng/tooltip';
+import { TruncatePipe } from './components/pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -16,13 +23,22 @@ import { ProductsComponent } from './components/products/products.component';
     HomeComponent,
     FooterComponent,
     HeaderComponent,
-    ProductsComponent
+    ProductsComponent,
+    TruncatePipe,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ButtonModule,
+    CardModule,
+    MenubarModule,
+    StyleClassModule,
+    PanelModule,
+    TooltipModule,
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
