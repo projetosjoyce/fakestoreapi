@@ -17,8 +17,19 @@ import { PanelModule } from 'primeng/panel';
 import { TooltipModule } from 'primeng/tooltip';
 import { TruncatePipe } from './components/pipes/truncate.pipe';
 import { PaginatorModule } from 'primeng/paginator';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Importa o BrowserAnimationsModule
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagModule } from 'primeng/tag';
+import { RatingModule } from 'primeng/rating';
+import { CommonModule } from '@angular/common';
+import { DataViewModule } from 'primeng/dataview';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { AutoFocusModule } from 'primeng/autofocus';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { ToastModule } from 'primeng/toast';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { InputTextModule } from 'primeng/inputtext';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 @NgModule({
@@ -30,7 +41,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     ProductsComponent,
     TruncatePipe,
   ],
-
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,8 +53,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
     TooltipModule,
     PaginatorModule,
     BrowserAnimationsModule,
-  ],
+    TagModule,
+    RatingModule,
+    CommonModule,
+    DataViewModule,
+    IconFieldModule,
+    InputIconModule,
+    AutoFocusModule,
+    ColorPickerModule,
+    ToastModule,
+    ToggleButtonModule,
+    InputTextModule,
+    RadioButtonModule,
 
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

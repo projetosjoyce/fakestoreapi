@@ -1,33 +1,122 @@
+<app-header></app-header>
 
-<div class="surface-card p-4 shadow-2 border-round">
-  <app-header></app-header>
-  <div class="text-3xl font-medium text-900 mb-3" style="text-align: center;">FILTRO PARA PESQUISAR</div>
+<div class="container">
+  <div class="card flex flex-wrap justify-content-center gap-3 card-style">
 
-  <div class="products-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;">
-    <div *ngFor="let product of paginatedProducts" class="product-card" style="width: calc(50% - 8px); box-sizing: border-box;">
-      <p-card [header]="product.title" subheader="Card Subheader" [style]="{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }">
-        <ng-template pTemplate="header">
-          <img [alt]="product.title" [src]="product.image" class="product-image" style="width: 100%; height: auto; max-height: 200px; object-fit: cover;" />
-        </ng-template>
-        <p pTooltip="{{ product.description }}" tooltipPosition="top" style="flex-grow: 1; overflow: hidden; margin: 0;">{{ product.description | truncate:100 }}</p>
-        <ng-template pTemplate="footer">
-          <div class="flex gap-3 mt-1">
-            <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full"></p-button>
-            <p-button label="Save" class="w-full" styleClass="w-full"></p-button>
-          </div>
-        </ng-template>
-      </p-card>
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText placeholder="Search Title" [(ngModel)]="searchQuery" (input)="filterProducts()" />
+    </span>
+
+    <div class="flex flex-wrap gap-3">
+
+      <div class="flex align-items-center">
+        <p-radioButton name="category" value="all" [(ngModel)]="selectedCategory" (onClick)="filterProductsByCategory()" inputId="categoryAll" />
+        <label for="categoryAll" class="ml-2">All</label>
+      </div>
+
+
+      <div class="flex align-items-center">
+        <p-radioButton name="category" value="jewelery" [(ngModel)]="selectedCategory" (onClick)="filterProductsByCategory()" inputId="category1" />
+        <label for="category1" class="ml-2">Jewelry</label>
+      </div>
+
+      <div class="flex align-items-center">
+        <p-radioButton name="category" value="men's clothing" [(ngModel)]="selectedCategory" (onClick)="filterProductsByCategory()" inputId="category2" />
+        <label for="category2" class="ml-2">Men's Clothing</label>
+      </div>
+
+      <div class="flex align-items-center">
+        <p-radioButton name="category" value="electronics" [(ngModel)]="selectedCategory" (onClick)="filterProductsByCategory()" inputId="category3" />
+        <label for="category3" class="ml-2">Electronics</label>
+      </div>
+
+      <div class="flex align-items-center">
+        <p-radioButton name="category" value="women's clothing" [(ngModel)]="selectedCategory" (onClick)="filterProductsByCategory()" inputId="category4" />
+        <label for="category4" class="ml-2">Women's Clothing</label>
+      </div>
     </div>
   </div>
 
-  <p-paginator
-    (onPageChange)="onPageChange($event)"
-    [first]="first"
-    [rows]="rows"
-    [totalRecords]="totalRecords"
-    [rowsPerPageOptions]="[6, 10, 20]" />
+  <div class="card">
+    <div class="controls button-card">
+      <p-button icon="pi pi-list" [rounded]="true" [text]="true" severity="help" class="large-icon" (click)="switchToListView()"></p-button>
+      <p-button icon="pi pi-th-large" [rounded]="true" [text]="true" severity="help" class="large-icon" (click)="switchToGridView()"></p-button>
+    </div>
 
-  <app-footer></app-footer>
+    <p-toast></p-toast> <!-- Adiciona o componente p-toast -->
+
+    <p-dataView #dv [value]="filteredProducts" [layout]="layout">
+      <ng-template pTemplate="listItem" let-product>
+        <div class="grid grid-nogutter">
+          <div class="col-12" *ngFor="let item of filteredProducts; let first = first">
+            <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3"
+              [ngClass]="{ 'border-top-1 surface-border': !first }">
+              <div class="md:w-10rem relative">
+                <img class="block xl:block mx-auto border-round w-full" [src]="item.image" [alt]="item.title" />
+              </div>
+              <div class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
+                <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+                  <div>
+                    <span class="font-medium text-secondary text-sm">{{ item.category }}</span>
+                    <div class="text-lg font-medium text-900 mt-2">{{ item.title }}</div>
+                    <div class="text-lg font-medium text-900 mt-2">
+                      <span class="text-900 font-medium text-sm pd-icon">{{ item.rating.rate }}</span>
+                      <i class="pi pi-star-fill text-yellow-500"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-column md:align-items-end gap-5">
+                  <span class="text-xl font-semibold text-900">{{ '$' + item.price }}</span>
+                  <div class="flex flex-row-reverse md:flex-row gap-2">
+                    <p-button icon="pi pi-shopping-cart" class="flex-auto md:flex-initial white-space-nowrap"
+                      label="Buy Now" [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+                    <p-button icon="pi pi-heart" [outlined]="true" [ngClass]="{'heart-selected': isSelected(item)}" (click)="toggleSelection(item)"></p-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="gridItem" let-product>
+        <div class="grid grid-nogutter">
+          <div class="col-12 sm:col-6 md:col-4 xl:col-3 p-2" *ngFor="let product of filteredProducts">
+            <div class="p-4 border-1 surface-border surface-card border-round flex flex-column">
+              <div class="surface-50 flex justify-content-center border-round p-3">
+                <div class="relative mx-auto">
+                  <img class="border-round w-full" [src]="product.image" [alt]="product.title"
+                    style="max-width: 300px;" />
+                </div>
+              </div>
+              <div class="pt-4">
+                <div class="flex flex-row justify-content-between align-items-start gap-2">
+                  <div>
+                    <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
+                    <div class="text-lg font-medium text-900 mt-1">{{ product.title }}</div>
+                  </div>
+                  <div class="surface-100 p-1" style="border-radius: 30px">
+                    <div class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2"
+                      style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                      <span class="text-900 font-medium text-sm">{{ product.rating.rate }}</span>
+                      <i class="pi pi-star-fill text-yellow-500"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-column gap-4 mt-4">
+                  <span class="text-2xl font-semibold">{{ '$' + product.price }}</span>
+                  <div class="flex gap-2">
+                    <p-button icon="pi pi-shopping-cart" class="flex-auto md:flex-initial white-space-nowrap"
+                      label="Buy Now" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+                    <p-button icon="pi pi-heart" [outlined]="true" [ngClass]="{'heart-selected': isSelected(product)}" (click)="toggleSelection(product)"></p-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
 </div>
-
-
+<app-footer></app-footer>

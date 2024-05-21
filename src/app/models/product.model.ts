@@ -7,5 +7,7 @@ export interface ProductModel {
   category: string;
   description: string;
   image: string;
-  rating: RatingModel
+  rating: RatingModel;
+  inventoryStatus: string;
+  selected: boolean;
 }
