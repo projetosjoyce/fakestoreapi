@@ -1,20 +1,21 @@
 <app-header></app-header>
 
+<div class="bt-lg">
+  <p-button label="Logout" (click)="logout()"></p-button>
+</div>
+
 <div class="container">
   <div class="card flex flex-wrap justify-content-center gap-3 card-style">
-
     <span class="p-input-icon-left">
       <i class="pi pi-search"></i>
       <input type="text" pInputText placeholder="Search Title" [(ngModel)]="searchQuery" (input)="filterProducts()" />
     </span>
 
     <div class="flex flex-wrap gap-3">
-
       <div class="flex align-items-center">
         <p-radioButton name="category" value="all" [(ngModel)]="selectedCategory" (onClick)="filterProductsByCategory()" inputId="categoryAll" />
         <label for="categoryAll" class="ml-2">All</label>
       </div>
-
 
       <div class="flex align-items-center">
         <p-radioButton name="category" value="jewelery" [(ngModel)]="selectedCategory" (onClick)="filterProductsByCategory()" inputId="category1" />
@@ -115,6 +116,17 @@
         </div>
       </ng-template>
     </p-dataView>
+
+    <div class="card flex justify-content-center">
+      <p-paginator
+          (onPageChange)="onPageChange($event)"
+          [first]="first"
+          [rows]="rows"
+          [totalRecords]="totalRecords"
+          [rowsPerPageOptions]="[10, 20, 30]" />
+  </div>
+
   </div>
 </div>
+
 <app-footer></app-footer>
