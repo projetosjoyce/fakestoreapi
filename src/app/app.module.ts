@@ -30,6 +30,10 @@ import { ToastModule } from 'primeng/toast';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { LoginComponent } from './components/login/login.component';
+import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
+import { ModalLoginRegisterComponent } from './components/modal-login-register/modal-login-register.component';
 
 
 @NgModule({
@@ -40,6 +44,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     HeaderComponent,
     ProductsComponent,
     TruncatePipe,
+    LoginComponent,
+    ModalLoginRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,9 +71,12 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     ToggleButtonModule,
     InputTextModule,
     RadioButtonModule,
+    DialogModule,
+
+
 
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

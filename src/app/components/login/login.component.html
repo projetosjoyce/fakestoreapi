@@ -1,0 +1,80 @@
+<div class="flex justify-content-center align-items-center min-h-screen">
+  <div class="card container">
+    <div class="flex flex-column justify-content-center align-items-center">
+      <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+        <app-header style="margin-left: 60px;"></app-header>
+
+        <div class="flex flex-wrap justify-content-center align-items-center gap-2 w-full">
+          <label class="w-6rem text-right">Username</label>
+          <input type="text" [(ngModel)]="username" name="username" pInputText id="username" class="w-12rem">
+        </div>
+        <p-toast></p-toast>
+
+        <div class="flex flex-wrap justify-content-center align-items-center gap-2 w-full">
+          <label class="w-6rem text-right">Password</label>
+          <input type="password" [(ngModel)]="password" name="password" pInputText id="password" class="w-12rem">
+        </div>
+        <p-toast></p-toast>
+
+        <div class="flex justify-content-center align-items-center w-full" style="margin-left: 10px;">
+          <div class="w-6rem"></div>
+          <p-button label="Login" icon="pi pi-user" styleClass="w-12rem mx-auto" (click)="login()"></p-button>
+        </div>
+
+        <div class="flex justify-content-center align-items-center w-full" style="margin-left: 10px;">
+          <div class="w-6rem"></div>
+          <a href="#" (click)="openSignUpModal($event)">Não tem login? Cadastre-se</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<app-modal-login-register *ngIf="visible"></app-modal-login-register>
+
+
+<!-- FUNCIONA MAIS PRECISO
+
+  - ABRIR E FECHAR MODAL OUTP ETC
+  - E TRAZER "SALVAR"
+
+<p-dialog header="Cadastro" [(visible)]="visible" [modal]="true" [closable]="false" [style]="{ width: '25rem' }">
+  <span class="p-text-secondary block mb-5">Preencha as informações abaixo para se cadastrar.</span>
+
+  <div class="flex align-items-center gap-3 mb-3">
+    <label for="name" class="font-semibold w-6rem">Name</label>
+    <input pInputText id="name" class="flex-auto" autocomplete="off" [(ngModel)]="user.name" />
+  </div>
+
+  <div class="flex align-items-center gap-3 mb-5">
+    <label for="username" class="font-semibold w-6rem">Username</label>
+    <input pInputText id="username" class="flex-auto" autocomplete="off" [(ngModel)]="user.username" />
+  </div>
+
+  <div class="flex align-items-center gap-3 mb-5">
+    <label for="email" class="font-semibold w-6rem">email</label>
+    <input pInputText id="email" class="flex-auto" autocomplete="off" [(ngModel)]="user.email" />
+  </div>
+
+  <div class="flex align-items-center gap-3 mb-5">
+    <label for="password" class="font-semibold w-6rem">password</label>
+    <input pInputText id="password" class="flex-auto" autocomplete="off" [(ngModel)]="user.password" />
+  </div>
+
+
+
+
+
+
+  <div class="flex justify-content-end gap-2">
+    <p-button label="Cancel" severity="secondary" (click)="visible = false"></p-button>
+    <p-button label="Save" (click)="saveUser()"></p-button>
+  </div>
+
+</p-dialog>
+
+
+-->

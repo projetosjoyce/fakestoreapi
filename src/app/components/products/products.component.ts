@@ -36,13 +36,11 @@ export class ProductsComponent implements OnInit {
   switchToListView() {
     this.layout = 'list';
     this.clearSelection();
-    console.log('List View');
   }
 
   switchToGridView() {
     this.layout = 'grid';
     this.clearSelection();
-    console.log('Grid View');
   }
 
   toggleSelection(product: ProductModel) {
