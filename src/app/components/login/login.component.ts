@@ -1,47 +1,69 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  username: string = '';
-  password: string = '';
+export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
   displaySignUpModal: boolean = false;
   visible: boolean = false;
   user: any = {};
+  formSubmitted: boolean = false;
 
   constructor(
+    private fb: FormBuilder,
     private authService: LoginService,
     private router: Router,
     private messageService: MessageService
-  ) {}
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+
+
+  ngOnInit(): void {
+
+  }
 
   login(): void {
-    this.authService.login(this.username, this.password).subscribe(
-      (response) => {
-        // Se a resposta for bem-sucedida, redirecione para products
-        this.router.navigate(['/products']);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Logado com sucesso',
-        });
-      },
-      (error) => {
-        // Se o login falhar, exiba uma mensagem de erro para o usuário
-        console.error('Erro ao fazer login:', error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Usuário ou senha incorretos',
-        });
-      }
-    );
+    this.formSubmitted = true;
+
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      this.authService.login(username, password).subscribe(
+        (response) => {
+          this.router.navigate(['/products']);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Logado com sucesso',
+          });
+        },
+        (error) => {
+          console.error('Erro ao fazer login:', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Usuário ou senha incorretos',
+          });
+        }
+      );
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Campos são obrigatórios',
+      });
+    }
   }
 
   openSignUpModal(event: Event) {

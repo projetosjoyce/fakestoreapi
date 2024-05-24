@@ -34,7 +34,8 @@ import { LoginComponent } from './components/login/login.component';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { ModalLoginRegisterComponent } from './components/modal-login-register/modal-login-register.component';
-
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -72,9 +73,8 @@ import { ModalLoginRegisterComponent } from './components/modal-login-register/m
     InputTextModule,
     RadioButtonModule,
     DialogModule,
-
-
-
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

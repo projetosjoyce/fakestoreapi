@@ -1,30 +1,42 @@
 <p-dialog header="Cadastro" [(visible)]="visible" [modal]="true" [closable]="false" [style]="{ width: '25rem' }">
-  <span class="p-text-secondary block mb-5">Preencha as informações abaixo para se cadastrar.</span>
+  <form [formGroup]="userForm" (ngSubmit)="saveUser()">
+    <span class="p-text-secondary block mb-5">Preencha as informações abaixo para se cadastrar.</span>
 
-  <div class="flex align-items-center gap-3 mb-3">
-    <label for="name" class="font-semibold w-6rem">Name</label>
-    <input pInputText id="name" class="flex-auto" autocomplete="off" [(ngModel)]="user.name" />
-  </div>
+    <div class="flex flex-column gap-3 mb-3">
+      <label for="name" class="font-semibold">Name</label>
+      <input pInputText id="name" class="w-full" autocomplete="off" formControlName="name" />
+      <div *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].touched" class="error">
+        Nome é obrigatório
+      </div>
+    </div>
 
-  <div class="flex align-items-center gap-3 mb-5">
-    <label for="username" class="font-semibold w-6rem">Username</label>
-    <input pInputText id="username" class="flex-auto" autocomplete="off" [(ngModel)]="user.username" />
-  </div>
+    <div class="flex flex-column gap-3 mb-3">
+      <label for="username" class="font-semibold">Username</label>
+      <input pInputText id="username" class="w-full" autocomplete="off" formControlName="username" />
+      <div *ngIf="userForm.controls['username'].invalid && userForm.controls['username'].touched" class="error">
+        Username é obrigatório
+      </div>
+    </div>
 
-  <div class="flex align-items-center gap-3 mb-5">
-    <label for="email" class="font-semibold w-6rem">email</label>
-    <input pInputText id="email" class="flex-auto" autocomplete="off" [(ngModel)]="user.email" />
-  </div>
+    <div class="flex flex-column gap-3 mb-3">
+      <label for="email" class="font-semibold">Email</label>
+      <input pInputText id="email" class="w-full" autocomplete="off" formControlName="email" />
+      <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched" class="error">
+        Email é obrigatório e deve ser válido
+      </div>
+    </div>
 
-  <div class="flex align-items-center gap-3 mb-5">
-    <label for="password" class="font-semibold w-6rem">password</label>
-    <input pInputText id="password" class="flex-auto" autocomplete="off" [(ngModel)]="user.password" />
-  </div>
+    <div class="flex flex-column gap-3 mb-3">
+      <label for="password" class="font-semibold">Password</label>
+      <input pInputText id="password" class="w-full" autocomplete="off" formControlName="password" />
+      <div *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched" class="error">
+        Password é obrigatório
+      </div>
+    </div>
 
-
-  <div class="flex justify-content-end gap-2">
-    <p-button label="Cancel" severity="secondary" (click)="visible = false"></p-button>
-    <p-button label="Save" (click)="saveUser()"></p-button>
-  </div>
-
+    <div class="flex justify-content-end gap-2">
+      <p-button label="Cancel" severity="secondary" (click)="closeModal()"></p-button>
+      <p-button label="Save" type="submit"></p-button>
+    </div>
+  </form>
 </p-dialog>

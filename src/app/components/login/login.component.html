@@ -4,34 +4,43 @@
       <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
         <app-header class="ml-60"></app-header>
 
-        <div class="flex flex-wrap justify-content-center align-items-center gap-2 w-full">
-          <label class="w-6rem text-right">Username</label>
-          <input type="text" [(ngModel)]="username" name="username" pInputText id="username" class="w-12rem">
-        </div>
-        <p-toast></p-toast>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-        <div class="flex flex-wrap justify-content-center align-items-center gap-2 w-full">
-          <label class="w-6rem text-right">Password</label>
-          <input type="password" [(ngModel)]="password" name="password" pInputText id="password" class="w-12rem">
-        </div>
-        <p-toast></p-toast>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2 w-full">
+            <label class="w-6rem text-right">Username</label>
+            <input type="text" formControlName="username" pInputText id="username" class="w-12rem">
+          </div>
+          <div class="flex justify-content-center align-items-center w-full mt-1">
+            <div *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched" class="error">
+              Username é obrigatório
+            </div>
+          </div>
+          <p-toast></p-toast>
 
-        <div class="flex justify-content-center align-items-center w-full ml-10">
-          <div class="w-6rem"></div>
-          <p-button label="Login" icon="pi pi-user" styleClass="w-12rem mx-auto" (click)="login()"></p-button>
-        </div>
+          <div class="flex flex-wrap justify-content-center align-items-center gap-2 w-full">
+            <label class="w-6rem text-right">Password</label>
+            <input type="password" formControlName="password" pInputText id="password" class="w-12rem">
+          </div>
+          <div class="flex justify-content-center align-items-center w-full mt-1">
+            <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" class="error">
+              Password é obrigatório
+            </div>
+          </div>
+          <p-toast></p-toast>
 
-        <div class="flex justify-content-center align-items-center w-full ml-10">
-          <div class="w-6rem"></div>
-          <a href="#" (click)="openSignUpModal($event)">Não tem login? Cadastre-se</a>
+          <div class="flex justify-content-center align-items-center w-full ml-10 mt-3">
+            <p-button label="Login" icon="pi pi-user" styleClass="w-12rem mx-auto" type="submit"></p-button>
+          </div>
+        </form>
+
+        <div class="flex justify-content-center align-items-center w-full ml-10 mt-3">
+          <a class="ml-10" href="#" (click)="openSignUpModal($event)">Não tem login? Cadastre-se</a>
         </div>
       </div>
     </div>
   </div>
-
-
 </div>
 
-
+<p-toast></p-toast>
 <app-modal-login-register *ngIf="visible"></app-modal-login-register>
 
