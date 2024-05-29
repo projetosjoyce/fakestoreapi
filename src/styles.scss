@@ -5,5 +5,107 @@
 
 //font header titulo
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Text:ital@0;1&family=Poetsen+One&family=Protest+Guerrilla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+p {
+  margin-bottom: 0px !important;
+}
 
+:root {
+  --primary: #883cae;
+  --shadow: rgba(183, 189, 193, 0.3);
+}
+
+.store {
+  &__font {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--primary);
+  }
+
+  &__icon {
+    color: var(--primary);
+    font-size: 2.5rem
+  }
+
+  &__middle {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__card {
+    border-radius: 15px;
+    box-shadow: 0px 10px 51px -5px var(--shadow);
+    min-width: 500px;
+    padding: 15px;
+    border: 0.5px solid var(--shadow);
+  }
+
+  &__input {
+    border-radius: 5px;
+    width: 100%;
+    padding: 8px;
+    margin: 15px 0px;
+    border: 1px solid gray;
+    color: gray;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__label {
+    background: #fff;
+    padding: 0px 10px;
+    color: #000;
+    width: fit-content;
+    position: fixed;
+    font-size: 12px;
+    border-radius: 20px;
+    margin-top: 7px;
+    margin-left: 7px;
+    font-family: "Poppins", sans-serif;
+    user-select: none;
+  }
+
+  &__button {
+    border-radius: 15px;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    margin: 5px;
+    background: transparent;
+    text-align: center;
+    vertical-align: sub;
+    user-select: none;
+
+    &--primary {
+      border: 1px solid var(--primary);
+      color: var(--primary);
+
+      &:hover {
+        background: var(--primary);
+        color: #fff;
+      }
+    }
+
+    &--secondary {
+      background: var(--primary);
+      color: #fff;
+      border: 1px solid var(--primary);
+
+      &:hover {
+        background: transparent;
+        color: var(--primary);
+      }
+    }
+  }
+
+}

@@ -3,8 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { ProductsComponent } from './components/products/products.component';
 import { HomeComponent } from './components/home/home.component';
+import { AuthRoutes } from './pages/auth/auth.routes';
 
 const routes: Routes = [
+  {
+    path: 'auth',
+    children: AuthRoutes
+  },
   { path: 'login', component: LoginComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'home', component: HomeComponent }, // Rota para o HomeComponent

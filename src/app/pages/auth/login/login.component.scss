@@ -1,0 +1,15 @@
+.lgn {
+  &__header {
+    text-align: center;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &--login {
+      width: 150px;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<section class="store__middle">
+  <section class="store__card">
+    <app-organism-header class="lgn__header" />
+
+    <form [formGroup]="form">
+      <section>
+        <section class="store__label"><p>Usuário*</p></section>
+        <input class="store__input" formControlName="username" type="text" autocomplete="username" />
+      </section>
+
+      <section>
+        <section class="store__label"><p>Senha*</p></section>
+        <input class="store__input" formControlName="password" type="password" autocomplete="current-password" />
+      </section>
+
+      <section class="lgn__action">
+        <button type="submit" class="store__button store__button--primary lgn__action--login">
+          Entrar
+          <atom-icon icon="pi-angle-right" />
+        </button>
+
+        <button type="submit" class="store__button store__button--secondary lgn__action--login">
+          Criar Conta
+          <atom-icon icon="pi-user-plus" />
+        </button>
+      </section>
+    </form>
+
+  </section>
+</section>
+

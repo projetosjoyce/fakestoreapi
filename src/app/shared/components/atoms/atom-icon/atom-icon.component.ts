@@ -16,5 +16,4 @@ export class AtomIconComponent implements OnInit {
   ngOnInit(): void {
     this.styleClass.push(this.icon);
   }
-
 }
