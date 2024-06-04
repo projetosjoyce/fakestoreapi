@@ -1,0 +1,25 @@
+<p>Produtos: </p>
+
+<section style="display: flex; flex-wrap: wrap; row-gap: 20px; column-gap: 20px;">
+
+  @for (item of products; track item.product.id) {
+    <section class="store__card" style="display: flex; align-items: center; justify-content: space-around; row-gap: 10px; column-gap: 10px;">
+      <section>
+        <img [src]="item.product.image" [alt]="item.product.title" width="100" height="100" />
+      </section>
+      <section style="width: 150px;">
+        <p style="text-align: justify; word-wrap: break-word; font-weight: bold; font-size: 12px;">{{item.product.title}}</p>
+        <p style="color: gray; font-size: 10px;">{{item.product.category}}</p>
+        <p style="font-size: 14px; font-weight: bold;">Total <span style="color: green;">$ {{calcPrice(item.product, item.amount)}}</span></p>
+        <p style="color: gray; font-size: 10px;">Amount {{item.amount}}</p>
+      </section>
+      <section>
+        <button class="store__button store__button--primary" type="button" (click)="removeProduct(item.product)">
+          - Remover
+        </button>
+      </section>
+    </section>
+  }
+
+
+</section>

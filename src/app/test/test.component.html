@@ -1,0 +1,8 @@
+<section style="height: 100vh; display: flex; align-items: center; justify-content: center; row-gap: 10px; column-gap: 20px;">
+  <section style="width: 500px; height: 500px; overflow: auto;" class="store__card">
+    <app-lista-produtos (selectedEvent)="productEvent.emit($event)" />
+  </section>
+  <section style="width: 500px; height: 500px; overflow: auto;" class="store__card">
+    <app-carrinho [productEvent]="productEvent" />
+  </section>
+</section>

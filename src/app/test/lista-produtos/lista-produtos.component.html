@@ -1,0 +1,32 @@
+@if (showError) {
+  <p>Falha ao Carregar Produtos!</p>
+}
+
+@if (loading) {
+  <p>Loading...</p>
+}
+
+@if (!loading) {
+  <section style="display: flex; flex-wrap: wrap; row-gap: 20px; column-gap: 20px;">
+
+    @for (product of products; track product.id) {
+      <section class="store__card" style="display: flex; align-items: center; justify-content: space-around; row-gap: 10px; column-gap: 10px;">
+        <section>
+          <img [src]="product.image" [alt]="product.title" width="100" height="100" />
+        </section>
+        <section style="width: 150px;">
+          <p style="text-align: justify; word-wrap: break-word; font-weight: bold; font-size: 12px;">{{product.title}}</p>
+          <p style="color: gray; font-size: 10px;">{{product.category}}</p>
+          <p style="color: green; font-size: 14px; font-weight: bold;">$ {{product.price}}</p>
+          <p style="color: gray; font-size: 10px;">{{product.rating.rate}}/5 | Reviews {{product.rating.count}}</p>
+        </section>
+        <section>
+          <button class="store__button store__button--primary" type="button" (click)="onSelected(product)">
+            + Adicionar
+          </button>
+        </section>
+      </section>
+    }
+
+  </section>
+}
