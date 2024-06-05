@@ -45,10 +45,11 @@ export class CarrinhoComponent implements OnInit {
     } else {
       this.products[productIndex].amount--;
     }
+
   }
 
-  public adicionarQuantidade(): void {
-    this.products
+  public getTotalAmount(): number {
+    return this.products.reduce((total, product) => total + product.amount, 0);
   }
 
 }
