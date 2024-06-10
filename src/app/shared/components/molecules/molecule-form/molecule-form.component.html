@@ -1,0 +1,5 @@
+<form [formGroup]="form">
+  @for (item of inputs; track item.key) {
+    <atom-input-default [inputData]="item" />
+  }
+</form>

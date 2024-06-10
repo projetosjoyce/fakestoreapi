@@ -1,0 +1,14 @@
+<section>
+  <atom-label [label]="inputData.label" [required]="inputData.validators?.required ?? false" [invalid]="invalid" />
+  <input
+    class="store__input"
+    [ngClass]="{ 'store__input--invalid': invalid }"
+    [formControlName]="inputData.key"
+    [type]="inputData.type"
+    [autocomplete]="inputData.autocomplete"
+  />
+
+  @if (invalid && invalidMessage) {
+    <atom-error [message]="invalidMessage" />
+  }
+</section>

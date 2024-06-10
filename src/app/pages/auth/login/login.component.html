@@ -1,31 +1,46 @@
 <section class="store__middle">
-  <section class="store__card">
-    <app-organism-header class="lgn__header" />
+  <atom-card>
+    <ng-template #header>
+      <app-organism-header class="lgn__header" />
+    </ng-template>
 
-    <form [formGroup]="form">
-      <section>
-        <section class="store__label"><p>Usuário*</p></section>
-        <input class="store__input" formControlName="username" type="text" autocomplete="username" />
-      </section>
+    <ng-template #body>
+      <molecule-form [inputs]="inputs" />
+      <!-- <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <section>
+          <section class="store__label" [ngClass]="{ 'store__label--invalid': isInvalid('username') }"><p>Usuário*</p></section>
+          <input class="store__input" [ngClass]="{ 'store__input--invalid': isInvalid('username') }" formControlName="username" type="text" autocomplete="username" />
 
-      <section>
-        <section class="store__label"><p>Senha*</p></section>
-        <input class="store__input" formControlName="password" type="password" autocomplete="current-password" />
-      </section>
+          @if (getError('username', 'required')) {
+            <span class="store__error">Usuário e Obrigatório.</span>
+          }
+        </section>
 
-      <section class="lgn__action">
-        <button type="submit" class="store__button store__button--primary lgn__action--login">
-          Entrar
-          <atom-icon icon="pi-angle-right" />
-        </button>
+        <section>
+          <section class="store__label" [ngClass]="{ 'store__label--invalid': isInvalid('password') }"><p>Senha*</p></section>
+          <input class="store__input" [ngClass]="{ 'store__input--invalid': isInvalid('password') }" formControlName="password" type="password" autocomplete="current-password" />
 
-        <button type="submit" class="store__button store__button--secondary lgn__action--login">
-          Criar Conta
-          <atom-icon icon="pi-user-plus" />
-        </button>
-      </section>
-    </form>
+          @if (getError('password', 'required')) {
+            <span class="store__error">Senha e Obrigatório.</span>
+          }
+        </section>
 
-  </section>
+        <section class="lgn__action">
+          <button type="submit" class="store__button store__button--primary lgn__action--login" [disabled]="form.invalid">
+            Entrar
+            <atom-icon icon="pi-angle-right" />
+          </button>
+
+          <button type="button" class="store__button store__button--secondary lgn__action--login">
+            Criar Conta
+            <atom-icon icon="pi-user-plus" />
+          </button>
+        </section>
+      </form> -->
+
+    </ng-template>
+
+  </atom-card>
+
 </section>
 
