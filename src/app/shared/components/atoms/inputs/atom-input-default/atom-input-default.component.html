@@ -3,7 +3,7 @@
   <input
     class="store__input"
     [ngClass]="{ 'store__input--invalid': invalid }"
-    [formControlName]="inputData.key"
+    [formControl]="formControl"
     [type]="inputData.type"
     [autocomplete]="inputData.autocomplete"
   />

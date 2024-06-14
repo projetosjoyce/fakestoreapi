@@ -1,5 +1,34 @@
-<form [formGroup]="form">
+@if (loading) {
+  <atom-loading />
+}
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
   @for (item of inputs; track item.key) {
-    <atom-input-default [inputData]="item" />
+    <atom-input-default
+      [inputData]="item"
+      [form]="form"
+      [invalid]="isInvalid(item.key)"
+      [invalidMessage]="invalidMessage(item)"
+    />
   }
+
+  <section class="store__item-middle">
+    @for (button of buttons; track $index) {
+      <atom-button
+        [label]="button.label"
+        [icon]="button.icon"
+        [color]="button.color"
+        [typeButton]="button.type"
+        [disableButton]="button.type === 'submit' ? form.invalid : button.disabled"
+        [styleObject]="button.styleObject"
+        (onClick)="button.type === 'submit' || !button.click ? null : button.click()"
+      />
+    } @empty {
+      <atom-button
+        label="Enviar"
+        typeButton="submit"
+        [disableButton]="form.invalid"
+      />
+    }
+  </section>
 </form>

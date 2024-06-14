@@ -1,46 +1,14 @@
 <section class="store__middle">
-  <atom-card>
+
+  <atom-card class="login">
     <ng-template #header>
-      <app-organism-header class="lgn__header" />
+      <app-organism-header class="login__header" />
     </ng-template>
 
     <ng-template #body>
-      <molecule-form [inputs]="inputs" />
-      <!-- <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-        <section>
-          <section class="store__label" [ngClass]="{ 'store__label--invalid': isInvalid('username') }"><p>Usuário*</p></section>
-          <input class="store__input" [ngClass]="{ 'store__input--invalid': isInvalid('username') }" formControlName="username" type="text" autocomplete="username" />
-
-          @if (getError('username', 'required')) {
-            <span class="store__error">Usuário e Obrigatório.</span>
-          }
-        </section>
-
-        <section>
-          <section class="store__label" [ngClass]="{ 'store__label--invalid': isInvalid('password') }"><p>Senha*</p></section>
-          <input class="store__input" [ngClass]="{ 'store__input--invalid': isInvalid('password') }" formControlName="password" type="password" autocomplete="current-password" />
-
-          @if (getError('password', 'required')) {
-            <span class="store__error">Senha e Obrigatório.</span>
-          }
-        </section>
-
-        <section class="lgn__action">
-          <button type="submit" class="store__button store__button--primary lgn__action--login" [disabled]="form.invalid">
-            Entrar
-            <atom-icon icon="pi-angle-right" />
-          </button>
-
-          <button type="button" class="store__button store__button--secondary lgn__action--login">
-            Criar Conta
-            <atom-icon icon="pi-user-plus" />
-          </button>
-        </section>
-      </form> -->
-
+      <molecule-form [inputs]="inputs" [buttons]="buttons" (formValue)="onSubmit($event)" />
     </ng-template>
 
   </atom-card>
 
 </section>
-

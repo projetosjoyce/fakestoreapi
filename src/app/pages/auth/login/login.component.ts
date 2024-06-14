@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { OrganismHeaderComponent } from '../../../shared/components/organisms';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AtomCardComponent, AtomIconComponent } from '../../../shared/components/atoms';
 import { NgClass } from '@angular/common';
-import { IInputData } from '../../../shared/interfaces';
+import { IButtonData, IInputData } from '../../../shared/interfaces';
 import { EInputAutoComplete, EInputType } from '../../../shared/enums';
 import { MoleculeFormComponent } from '../../../shared/components/molecules';
 
@@ -25,8 +25,6 @@ import { MoleculeFormComponent } from '../../../shared/components/molecules';
 })
 export class LoginComponent {
 
-  public form: FormGroup;
-
   public inputs: IInputData[] = [
     {
       key: 'username',
@@ -39,43 +37,38 @@ export class LoginComponent {
     },
     {
       key: 'password',
-      label: 'senha',
+      label: 'Senha',
       type: EInputType.Password,
       autocomplete: EInputAutoComplete.CurrentPassword,
       validators: {
-        required: true
+        required: true,
       }
     },
   ]
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) {
-    this.form = this.formBuilder.group({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
-    })
-  }
-
-  private isTouched(key: string): boolean {
-    return this.form.controls[key].touched;
-  }
-
-  public getError(key: string, errorCode: string): boolean {
-    if (this.isTouched(key)) {
-      return this.form.controls[key].getError(errorCode) ? true : false;
+  public buttons: IButtonData[] = [
+    {
+      label: 'Entrar',
+      icon: 'pi-angle-right',
+      color: 'primary',
+      type: 'submit',
+      disabled: false,
+      styleObject: {
+        width: '150px'
+      }
+    },
+    {
+      label: 'Criar Conta',
+      icon: 'pi-user-plus',
+      color: 'secondary',
+      type: 'button',
+      disabled: false,
+      styleObject: {
+        width: '150px'
+      },
+      click: () => location.href = '/auth/register'
     }
-
-    return false;
-  }
-
-  public isInvalid(key: string): boolean {
-    if (this.isTouched(key)) {
-      return this.form.controls[key].invalid;
-    }
-
-    return false;
-  }
+  ];
 
   public onSubmit(value: { username: string; password: string; }): void {
     alert(`Username: ${value.username}\n\nPassword: ${value.password}`);

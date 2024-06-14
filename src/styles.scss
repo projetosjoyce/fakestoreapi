@@ -37,6 +37,13 @@ p {
     justify-content: center;
   }
 
+  &__item-middle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+
   &__card {
     border-radius: 15px;
     box-shadow: 0px 10px 51px -5px var(--shadow);

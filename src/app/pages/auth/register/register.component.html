@@ -1,0 +1,14 @@
+<section class="store__middle">
+
+  <atom-card class="resgister">
+    <ng-template #header>
+      <app-organism-header class="resgister__header" />
+    </ng-template>
+
+    <ng-template #body>
+      <molecule-form [inputs]="inputs" [buttons]="buttons" [loading]="loading" (formValue)="onSubmit($event)" />
+    </ng-template>
+
+  </atom-card>
+
+</section>
